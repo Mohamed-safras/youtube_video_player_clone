@@ -13,7 +13,7 @@ const btn_next = document.querySelector("#btn_next");
 const screen_btn = document.querySelector(".screen_btn");
 const controlsBtn = document.querySelectorAll(".controls button");
 const settingsBtn = document.querySelector("[data-label=Settings]");
-
+const mini_btn = document.querySelector("#mini_player");
 const [play_or_pause, next_btn, mute_or_unmute] = controlsBtn;
 
 import video_data from "./data.js";
@@ -171,20 +171,21 @@ function activeList(id) {
   order.forEach((item, index) => {
     index !== currentVideo
       ? (item.innerHTML = index + 1)
-      : (item.innerHTML = `<svg
-            class="play"
-            height="100%"
-            version="1.1"
-            viewBox="0 0 36 36"
-            width="100%"
-          >
-            <use class="ytp-svg-shadow" xlink:href="#ytp-id-46"></use>
-            <path
-              class="ytp-svg-fill"
-              d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z"
-              id="ytp-id-46"
-            ></path>
-          </svg>`);
+      : (item.innerHTML = `
+              <svg
+                  class="play"
+                  height="100%"
+                  version="1.1"
+                  viewBox="0 0 36 36"
+                  width="100%"
+                >
+                  <use class="ytp-svg-shadow" xlink:href="#ytp-id-46"></use>
+                  <path
+                    class="ytp-svg-fill"
+                    d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z"
+                    id="ytp-id-46"
+                  ></path>
+              </svg>`);
   });
 }
 
@@ -201,6 +202,8 @@ document.addEventListener("fullscreenchange", () => {
   video_continer.classList.toggle("fullscreen", document.fullscreenElement);
 });
 
+// document.addEventListener("enterpictureinpicture", () => {});
+
 screen_btn.addEventListener("click", changeScreen);
 video.addEventListener("dblclick", changeScreen);
 
@@ -211,6 +214,22 @@ function changeScreen() {
     document.exitFullscreen();
   }
 }
+
+const miniplayMode = () => {
+  if (video_continer.classList.contains("mini-player")) {
+    document.exitPictureInPicture();
+  } else {
+    video.requestPictureInPicture();
+  }
+};
+video.addEventListener("enterpictureinpicture", () => {
+  video_continer.classList.add("mini-player");
+});
+
+video.addEventListener("leavepictureinpicture", () => {
+  video_continer.classList.remove("mini-player");
+});
+mini_btn.addEventListener("click", miniplayMode);
 
 controlsBtn.forEach((item) => {
   item.addEventListener("mouseenter", (e) => {

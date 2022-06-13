@@ -113,7 +113,7 @@ const displayVideo = function () {
       return `<li class="video_list" data-id=${id}>
       <div class="video_list_left">
         <div class="order">
-          <span>${index + 1}</span>
+          <span></span>
         </div>
         <div class="video_tumnail">
           <img src="./src/image/${tumblrImage}" alt="" />
@@ -151,8 +151,8 @@ function changeThumbnail(e, ishoverd) {
   const id = +e.target.closest(".video_list").dataset.id - 1;
   const [img] = e.target.children;
   ishoverd
-    ? (img.src = `./src/image/${video_data[id]?.tumbnail}`)
-    : (img.src = `./src/image/${video_data[id]?.tumblrImage}`);
+    ? (img.src = "./src/image/" + video_data[id]?.tumbnail)
+    : (img.src = "./src/image/" + video_data[id]?.tumblrImage);
 }
 
 video_tumnail.forEach((item) => {

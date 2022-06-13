@@ -113,7 +113,7 @@ const displayVideo = function () {
       return `<li class="video_list" data-id=${id}>
       <div class="video_list_left">
         <div class="order">
-          <span>${index + 1}</span>
+          <span></span>
         </div>
         <div class="video_tumnail">
           <img src="./src/image/${tumblrImage}" alt="" />
@@ -151,8 +151,8 @@ function changeThumbnail(e, ishoverd) {
   const id = +e.target.closest(".video_list").dataset.id - 1;
   const [img] = e.target.children;
   ishoverd
-    ? (img.src = `./src/image/${video_data[id]?.tumbnail}`)
-    : (img.src = `./src/image/${video_data[id]?.tumblrImage}`);
+    ? (img.src = "./src/image/" + video_data[id]?.tumbnail)
+    : (img.src = "./src/image/" + video_data[id]?.tumblrImage);
 }
 
 video_tumnail.forEach((item) => {
@@ -172,19 +172,19 @@ function activeList(id) {
     index !== currentVideo
       ? (item.innerHTML = index + 1)
       : (item.innerHTML = `<svg
-    class="play"
-    height="100%"
-    version="1.1"
-    viewBox="0 0 36 36"
-    width="100%"
-  >
-    <use class="ytp-svg-shadow" xlink:href="#ytp-id-46"></use>
-    <path
-      class="ytp-svg-fill"
-      d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z"
-      id="ytp-id-46"
-    ></path>
-  </svg>`);
+            class="play"
+            height="100%"
+            version="1.1"
+            viewBox="0 0 36 36"
+            width="100%"
+          >
+            <use class="ytp-svg-shadow" xlink:href="#ytp-id-46"></use>
+            <path
+              class="ytp-svg-fill"
+              d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z"
+              id="ytp-id-46"
+            ></path>
+          </svg>`);
   });
 }
 

@@ -26,6 +26,21 @@ import video_data from "./data.js";
 
 let currentVideo = 0;
 
+let playPromise = video.play();
+
+if (playPromise !== undefined)
+  playPromise
+    .then((__) => {
+      // Automatic playback started!
+      // Show playing UI.
+      video.play();
+    })
+    .catch((error) => {
+      // Auto-play was prevented
+      // Show paused UI.
+      video.pause();
+    });
+
 const formatNumber = new Intl.NumberFormat("en-IN", {
   minimumIntegerDigits: 2,
 });

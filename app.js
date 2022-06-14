@@ -18,6 +18,22 @@ const tag = document.querySelector(".tag");
 const current_video_position = document.querySelector(
   "#current_video_position"
 );
+const options = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "9c77516bcamshce46050bd4d6ed4p153fbbjsn0ef4b6db9364",
+    "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+  },
+};
+
+fetch(
+  "https://spotify23.p.rapidapi.com/search/?q=%3CREQUIRED%3E&type=multi&offset=0&limit=10&numberOfTopResults=30",
+  options
+)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
+
 const total_video = document.querySelector("#total_video");
 
 const [play_or_pause, next_btn, mute_or_unmute] = controlsBtn;

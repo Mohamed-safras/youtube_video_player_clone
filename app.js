@@ -14,6 +14,12 @@ const screen_btn = document.querySelector(".screen_btn");
 const controlsBtn = document.querySelectorAll(".controls button");
 const settingsBtn = document.querySelector("[data-label=Settings]");
 const mini_btn = document.querySelector("#mini_player");
+const tag = document.querySelector(".tag");
+const current_video_position = document.querySelector(
+  "#current_video_position"
+);
+const total_video = document.querySelector("#total_video");
+
 const [play_or_pause, next_btn, mute_or_unmute] = controlsBtn;
 
 import video_data from "./data.js";
@@ -141,6 +147,7 @@ btn_next.addEventListener("click", nextVideo);
 
 /**/
 window.addEventListener("load", () => {
+  total_video.textContent = video_data.length;
   changeVideo(currentVideo);
   activeList(currentVideo);
 });
@@ -164,6 +171,7 @@ const video_list = document.querySelectorAll(".video_list");
 const order = document.querySelectorAll(".order span");
 
 function activeList(id) {
+  current_video_position.textContent = currentVideo + 1;
   video_list.forEach((item) => {
     item.classList.remove("active");
   });

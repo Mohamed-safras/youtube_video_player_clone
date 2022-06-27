@@ -316,6 +316,7 @@ svg {
 }
 .time {
   font-size: 14px;
+  cursor: pointer;
 }
 .time:first-child {
   width: 35px;

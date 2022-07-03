@@ -1,24 +1,22 @@
-const video_continer = document.querySelector(".video_continer");
-const play_pause_btn = document.querySelector(".play_pause");
-const video = document.querySelector("video");
-const slider = document.querySelector("#volume-range");
-const volumeBtn = document.querySelector(".volume-btn");
-const currentTimeEl = document.querySelector("#current-time");
-const totalTimeEl = document.querySelector("#total-time"),
+const video_continer = document.querySelector(".video_continer"),
+  play_pause_btn = document.querySelector(".play_pause"),
+  video = document.querySelector("video"),
+  slider = document.querySelector("#volume-range"),
+  volumeBtn = document.querySelector(".volume-btn"),
+  currentTimeEl = document.querySelector("#current-time"),
+  totalTimeEl = document.querySelector("#total-time"),
   progress_bar = document.querySelector(".progress_bar"),
-  progress = document.querySelector(".progress");
-const soundProgress = document.querySelector(".progress-input");
-const video_lists = document.querySelector(".video_lists");
-const btn_next = document.querySelector("#btn_next");
-const screen_btn = document.querySelector(".screen_btn");
-const controlsBtn = document.querySelectorAll(".controls button");
-const settingsBtn = document.querySelector("[data-label=Settings]");
-const mini_btn = document.querySelector("#mini_player");
-const tag = document.querySelector(".tag");
-const current_video_position = document.querySelector(
-  "#current_video_position"
-);
-const total_video = document.querySelector("#total_video");
+  progress = document.querySelector(".progress"),
+  soundProgress = document.querySelector(".progress-input"),
+  video_lists = document.querySelector(".video_lists"),
+  btn_next = document.querySelector("#btn_next"),
+  screen_btn = document.querySelector(".screen_btn"),
+  controlsBtn = document.querySelectorAll(".controls button"),
+  settingsBtn = document.querySelector("[data-label=Settings]"),
+  mini_btn = document.querySelector("#mini_player"),
+  tag = document.querySelector(".tag"),
+  current_video_position = document.querySelector("#current_video_position"),
+  total_video = document.querySelector("#total_video");
 
 const [play_or_pause, next_btn, mute_or_unmute] = controlsBtn;
 
@@ -46,16 +44,18 @@ const formatNumber = new Intl.NumberFormat("en-IN", {
 });
 
 const formatTime = (time) => {
-  const hour = Math.floor(time / 3600);
-  const min = Math.floor(time / 60);
-  const sec = Math.floor(time % 60);
+  if (time) {
+    const hour = Math.floor(time / 3600);
+    const min = Math.floor(time / 60);
+    const sec = Math.floor(time % 60);
 
-  if (hour < 1) {
-    return `${formatNumber.format(min)}:${formatNumber.format(sec)}`;
-  } else {
-    return `${formatNumber.format(hour)}:${formatNumber.format(
-      min
-    )}:${formatNumber.format(sec)}`;
+    if (hour < 1) {
+      return `${formatNumber.format(min)}:${formatNumber.format(sec)}`;
+    } else {
+      return `${formatNumber.format(hour)}:${formatNumber.format(
+        min
+      )}:${formatNumber.format(sec)}`;
+    }
   }
 };
 
@@ -160,7 +160,6 @@ function nextVideo() {
 
 btn_next.addEventListener("click", nextVideo);
 
-/**/
 window.addEventListener("load", () => {
   total_video.textContent = video_data.length;
   changeVideo(currentVideo);
@@ -225,8 +224,6 @@ document.addEventListener("fullscreenchange", () => {
   video_continer.classList.toggle("fullscreen", document.fullscreenElement);
 });
 
-// document.addEventListener("enterpictureinpicture", () => {});
-
 screen_btn.addEventListener("click", changeScreen);
 video.addEventListener("dblclick", changeScreen);
 
@@ -268,3 +265,12 @@ controlsBtn.forEach((item) => {
     e.target.classList.remove("show_label");
   });
 });
+
+/* get geolocations */
+navigator.geolocation &&
+  navigator.geolocation.getCurrentPosition(({ coords }) => {
+    const { latitude, longitude } = coords;
+    console.log(latitude, longitude);
+  });
+
+console.log(navigator);

@@ -16,7 +16,8 @@ const video_continer = document.querySelector(".video_continer"),
   mini_btn = document.querySelector("#mini_player"),
   tag = document.querySelector(".tag"),
   current_video_position = document.querySelector("#current_video_position"),
-  total_video = document.querySelector("#total_video");
+  total_video = document.querySelector("#total_video"),
+  open_close = document.querySelector(".open_close");
 
 const [play_or_pause, next_btn, mute_or_unmute] = controlsBtn;
 
@@ -274,3 +275,7 @@ navigator.geolocation &&
   });
 
 console.log(navigator);
+
+open_close.addEventListener("click", () => {
+  video_lists.classList.toggle("closed");
+});

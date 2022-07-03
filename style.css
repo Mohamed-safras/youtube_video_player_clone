@@ -38,7 +38,7 @@ body {
 
 .continer {
   display: grid;
-  gap: 10px;
+  gap: 20px;
   grid-template-columns: 2fr 1fr;
   margin: 60px 60px 0px;
 }
@@ -354,21 +354,28 @@ svg {
   font-weight: 700;
   line-height: 1.4;
 }
-.close {
+.open_close {
   width: 25px;
   height: 25px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  flex-direction: column;
 }
-.close svg {
+
+.open_close svg {
   width: 100%;
   height: 100%;
 }
 .video_lists {
   height: 380px;
   overflow-y: scroll;
+  transition: height 100ms ease-in-out;
+}
+
+.video_lists.closed {
+  height: 0;
 }
 .video_lists .video_list {
   display: flex;

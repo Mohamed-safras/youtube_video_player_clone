@@ -265,3 +265,12 @@ controlsBtn.forEach((item) => {
     e.target.classList.remove("show_label");
   });
 });
+
+/* get geolocations */
+navigator.geolocation &&
+  navigator.geolocation.getCurrentPosition(({ coords }) => {
+    const { latitude, longitude } = coords;
+    console.log(latitude, longitude);
+  });
+
+console.log(navigator);

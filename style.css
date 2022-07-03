@@ -134,7 +134,7 @@ body {
   background: red;
   border-radius: 50%;
   top: -4px;
-  right: -6px;
+  right: -7px;
   transform: scale(0);
   transition: transform 250ms ease-in-out;
   transform-origin: center;

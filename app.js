@@ -7,7 +7,6 @@ const video_continer = document.querySelector(".video_continer"),
   totalTimeEl = document.querySelector("#total-time"),
   progress_bar = document.querySelector(".progress_bar"),
   progress = document.querySelector(".progress"),
-  soundProgress = document.querySelector(".progress-input"),
   video_lists = document.querySelector(".video_lists"),
   btn_next = document.querySelector("#btn_next"),
   screen_btn = document.querySelector(".screen_btn"),
@@ -23,7 +22,7 @@ const [play_or_pause, next_btn, mute_or_unmute] = controlsBtn;
 
 import video_data from "./data.js";
 
-let currentVideo = 0;
+let currentVideo = Number.parseInt(localStorage.getItem("current_video")) || 0;
 
 let playPromise = video.play();
 
@@ -72,7 +71,6 @@ video.addEventListener("play", () => {
 video.addEventListener("pause", () => {
   video_continer.classList.add("paused");
   play_or_pause.dataset.label = "Play (K)";
-  // console.log(controlsBtn.dataset.label);
 });
 
 video.addEventListener(
@@ -100,7 +98,6 @@ slider.addEventListener(
   (e) => {
     video.volume = e.target.value;
     video.muted = e.target.value === 0;
-    soundProgress.style.width = `${e.target.value * 100}%`;
   },
   false
 );
@@ -118,6 +115,21 @@ video.addEventListener("volumechange", () => {
 });
 
 progress_bar.addEventListener("click", changeCurrentTime);
+
+const draggableProgressBar = (e) => {
+  const progressWidth = progress_bar.clientWidth;
+  const currentWidth = e.offsetX;
+  progress.style.width = `${currentWidth}px`;
+  video.currentTime = (currentWidth / progressWidth) * video.duration;
+  currentTimeEl.textContent = formatTime(video.currentTime);
+};
+progress_bar.addEventListener("mousedown", () => {
+  progress_bar.addEventListener("mousemove", draggableProgressBar);
+});
+
+video_continer.addEventListener("mouseup", () => {
+  progress_bar.removeEventListener("mousemove", draggableProgressBar);
+});
 
 function changeCurrentTime(e) {
   const progressWidth = progress_bar.clientWidth;
@@ -154,6 +166,8 @@ displayVideo();
 
 function nextVideo() {
   currentVideo === video_data.length - 1 ? (currentVideo = 0) : currentVideo++;
+  localStorage.setItem("current_video", currentVideo);
+
   changeVideo(currentVideo);
   activeList(currentVideo);
   video.play();
@@ -216,6 +230,8 @@ video_lists.addEventListener("click", (e) => {
   const target = e.target;
   const closest = target.closest(".video_list").dataset.id - 1;
   currentVideo = Number.parseInt(closest);
+  localStorage.setItem("current_video", currentVideo);
+
   activeList(currentVideo);
   changeVideo(currentVideo);
   video.play();
@@ -267,15 +283,6 @@ controlsBtn.forEach((item) => {
   });
 });
 
-/* get geolocations */
-navigator.geolocation &&
-  navigator.geolocation.getCurrentPosition(({ coords }) => {
-    const { latitude, longitude } = coords;
-    console.log(latitude, longitude);
-  });
-
-console.log(navigator);
-
-open_close.addEventListener("click", () => {
+open_close.addEventListener("click", (e) => {
   video_lists.classList.toggle("closed");
 });

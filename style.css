@@ -100,7 +100,8 @@ body {
 
 .continer .video_continer .video-controls-container .progress_bar {
   position: absolute;
-  bottom: 50px;
+  bottom: 60px;
+  top: 0;
   left: 0;
   right: 0;
   height: 4px;
@@ -109,10 +110,10 @@ body {
   background-color: rgba(215, 215, 215, 0.3);
 
   cursor: pointer;
-  transition: height 250ms ease-in-out;
+  transition: height 200ms ease-in-out;
 }
 .continer .video_continer .video-controls-container .progress_bar:hover {
-  height: 6px;
+  height: 8px;
 }
 .continer .video_continer .video-controls-container .progress_bar .progress {
   transition: transform 0.5s ease-in-out;
@@ -133,10 +134,10 @@ body {
   height: 14px;
   background: red;
   border-radius: 50%;
-  top: -4px;
-  right: -7px;
+  top: -3px;
+  right: -8px;
   transform: scale(0);
-  transition: transform 250ms ease-in-out;
+  transition: transform 200ms ease-in-out;
   transform-origin: center;
 }
 .continer
@@ -151,7 +152,7 @@ body {
   display: flex;
   gap: 10px;
   align-items: center;
-  padding: 8px 24px;
+  padding: 6px 24px;
 }
 
 .continer .video_continer .video-controls-container .controls button {
@@ -259,42 +260,44 @@ body {
   display: block;
 }
 
-.range-continer {
-  width: 100px;
+.sound__container {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  cursor: pointer;
+}
+
+.sound__container .volume-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sound__container:hover #volume-range {
+  width: 70px;
+  transform: scaleX(1);
 }
 
 input[type="range"] {
   -webkit-appearance: none;
-  width: 100%;
+  width: 0px;
   height: 3px;
   background: #ddd;
   border-radius: 5px;
+  transform: scaleX(0);
   outline: none;
   border: none;
   cursor: pointer;
   z-index: 3;
+  transition: all 350ms ease-in;
+  transform-origin: left;
 }
+
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 12px;
   height: 12px;
   background: red;
   border-radius: 50%;
-}
-.progress-input {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: red;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1;
 }
 
 input[type="range"]::-webkit-slider-runnable-progress {
